@@ -21,24 +21,14 @@ def compChooseWord(hand, wordList):
     wordList: list (string)
     returns: string or None
     """
-    # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
-    # Create a new variable to store the maximum score seen so far (initially 0)
+    bestScore, bestWord = 0, None
 
-    # Create a new variable to store the best word seen so far (initially None)
-
-    # For each word in the wordList
-
-        # If you can construct the word from your hand
-        # (hint: you can use isValidWord, or - since you don't really need to test if the word is in the wordList - you can make a similar function that omits that test)
-
-            # Find out how much making that word is worth
-
-            # If the score for that word is higher than your best score
-
-                # Update your best score, and best word accordingly
-
-
-    # return the best word you found.
+    for word in wordList:
+        if isValidWord(word, hand, wordList):
+            score = getWordScore(word, HAND_SIZE)
+            if score > bestScore:
+                bestScore, bestWord = score, word
+    return bestWord
 
 
 #
