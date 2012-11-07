@@ -9,4 +9,19 @@ Week 2
 Week 3
 ======
 
-* Currently waiting for the next PSet to start work.
+* Finished and working just fine.
+
+Week 4
+======
+
+* Finished entirely, no issues
+
+Week 5
+======
+
+* Not started yet
+
+Midterm
+=======
+
+* All finished, could use touchups.

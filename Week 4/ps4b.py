@@ -1,5 +1,4 @@
 from ps4a import *
-import time
 
 
 #
@@ -52,7 +51,28 @@ def compPlayHand(hand, wordList):
     hand: dictionary (string -> int)
     wordList: list (string)
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    lettersLeft = HAND_SIZE
+    totalScore = 0
+
+    while lettersLeft > 0:
+        print "Current Hand:",
+        displayHand(hand)
+
+        word = compChooseWord(hand, wordList)
+        if word is None:
+            break
+        else:
+            wordScore = getWordScore(word, HAND_SIZE)
+            totalScore += wordScore
+            print '"' + word + '" earned', str(wordScore), "points. Total:", str(totalScore), "points"
+
+            hand = updateHand(hand, word)
+            lettersLeft = calculateHandlen(hand)
+
+    if lettersLeft == 0:
+        print "Run out of letters. Total score:", totalScore, "points"
+    else:
+        print "Goodbye! Total score:", totalScore, "points"
 
 
 #
@@ -83,8 +103,38 @@ def playGame(wordList):
 
     wordList: list (string)
     """
-    # TO DO... <-- Remove this comment when you code this function
-    print "playGame not yet implemented."  # <-- Remove this when you code this function
+    hand = None
+    while True:
+        # Determine what the hand is
+        userCmd = raw_input("Enter n to deal a new hand, r to replay the last hand, or e to end game: ")
+        if userCmd == 'n':
+            hand = dealHand(HAND_SIZE)
+        elif userCmd == 'r':
+            if hand is None:
+                print "You have not played a hand yet. Please play a new hand first!"
+                continue
+        elif userCmd == 'e':
+            break
+        else:
+            print "Invalid Command"
+            continue
+
+        # Play the game itself
+        while True:
+            userCmd = raw_input("Enter u to play as a user, c to play as a computer: ")
+            if userCmd == 'u':
+                playHand(hand.copy(), wordList, HAND_SIZE)
+                break
+            elif userCmd == 'c':
+                compPlayHand(hand.copy(), wordList)
+                break
+            else:
+                print "Invalid Command"
+                continue
+        print
+
+    # finished
+    print
 
 
 #

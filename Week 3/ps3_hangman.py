@@ -56,7 +56,11 @@ def isWordGuessed(secretWord, lettersGuessed):
     returns: boolean, True if all the letters of secretWord are in lettersGuessed;
       False otherwise
     '''
-    secretLetters = [a for a in secretWord]
+    secretLetters = []
+    for c in secretWord:
+        if c in secretLetters:
+            continue
+        secretLetters.append(c)
 
     for letter in lettersGuessed:
         if letter in secretLetters:
@@ -155,5 +159,13 @@ def hangman(secretWord):
         print turnSep
 
 if __name__ == '__main__':
-    secretWord = chooseWord(wordlist).lower()
-    hangman(secretWord)
+    while True:
+        usrCmd = raw_input("Play a game? (y/n) ")
+        print ""
+        if usrCmd.lower() == 'y':
+            secretWord = chooseWord(wordlist).lower()
+            hangman(secretWord)
+        elif usrCmd.lower() == 'n':
+            break
+        else:
+            continue
